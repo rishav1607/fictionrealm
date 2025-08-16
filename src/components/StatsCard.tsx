@@ -6,7 +6,7 @@ interface StatsCardProps {
 
 const StatsCard = ({ icon, value, label }: StatsCardProps) => {
   return (
-    <div className="bg-gradient-card rounded-lg p-6 shadow-card hover:shadow-glow transition-all duration-300">
+    <div className="bg-solid-card rounded-lg p-6 shadow-card hover:shadow-glow transition-all duration-300">
       <div className="flex items-center space-x-4">
         <div className="p-3 bg-primary rounded-lg text-primary-foreground">
           {icon}

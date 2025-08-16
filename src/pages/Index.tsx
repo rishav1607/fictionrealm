@@ -1,7 +1,10 @@
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import StoryCard from "@/components/StoryCard";
 import StatsCard from "@/components/StatsCard";
 import SectionHeader from "@/components/SectionHeader";
+import TopSeriesCard from "@/components/TopSeriesCard";
+import DragCarousel from "@/components/DragCarousel";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Eye, Users, MessageSquare, TrendingUp, Sparkles, Heart, Clock } from "lucide-react";
 
@@ -14,6 +17,49 @@ import quantumDreamsImage from "@/assets/story-quantum-dreams.jpg";
 import vampireAcademyImage from "@/assets/story-vampire-academy.jpg";
 
 const Index = () => {
+  const heroStories = [
+    {
+      id: 1,
+      title: "Shadow Realm Chronicles",
+      author: "Community Authors",
+      description: "Enter a dark fantasy world where ancient powers awaken and heroes must face their deepest fears to save humanity.",
+      image: heroImage,
+      featured: true
+    },
+    {
+      id: 2,
+      title: "Cyber Nexus Protocol",
+      author: "Digital Writers",
+      description: "In a cyberpunk future where AI consciousness merges with human emotion, one hacker holds the key to digital revolution.",
+      image: cyberNexusImage,
+      featured: true
+    },
+    {
+      id: 3,
+      title: "Hearts in Harmony",
+      author: "Romance Guild",
+      description: "Two musicians from different worlds find love through melody, but their past threatens to silence their future together.",
+      image: heartsHarmonyImage,
+      featured: true
+    },
+    {
+      id: 4,
+      title: "Quantum Dreams",
+      author: "Sci-Fi Collective",
+      description: "Reality bends when a physicist discovers parallel dimensions bleeding into our world, each more dangerous than the last.",
+      image: quantumDreamsImage,
+      featured: true
+    },
+    {
+      id: 5,
+      title: "Magenetic: The Lost Prophecy",
+      author: "Fantasy Masters",
+      description: "A young mage must decode an ancient prophecy to prevent the return of a forgotten evil that once nearly destroyed the world.",
+      image: lostProphecyImage,
+      featured: true
+    }
+  ];
+
   const statsData = [
     { icon: <BookOpen className="h-6 w-6" />, value: 6, label: "Stories" },
     { icon: <Eye className="h-6 w-6" />, value: 0, label: "Reads" },
@@ -30,30 +76,152 @@ const Index = () => {
   ];
 
   const newStories = [
-    { title: "Cyber Nexus Protocol", image: cyberNexusImage, chapters: 6, views: 245, comments: 5, status: "new" as const },
-    { title: "Hearts in Harmony", image: heartsHarmonyImage, chapters: 4, views: 123, comments: 8, status: "new" as const },
-    { title: "Shadow Realm Chronicles", image: heroImage, chapters: 8, views: 567, comments: 15, status: "new" as const },
-    { title: "Quantum Dreams", image: quantumDreamsImage, chapters: 2, views: 89, comments: 3, status: "new" as const },
-    { title: "Vampire Academy: Blood Wars", image: vampireAcademyImage, chapters: 7, views: 432, comments: 12, status: "new" as const },
-    { title: "Magenetic: The Lost Prophecy", image: lostProphecyImage, chapters: 15, views: 654, comments: 21, status: "new" as const },
+    { title: "The Zenith is Dead", image: cyberNexusImage, chapter: "Chapter 27", timeAgo: "21 hours ago" },
+    { title: "Holy Necromancer", image: heartsHarmonyImage, chapter: "Chapter 48", timeAgo: "23 hours ago" },
+    { title: "Hypogeum I", image: heroImage, chapter: "Chapter 23", timeAgo: "21 hours ago" },
+    { title: "The Ultimate Multi-Talented Prophet", image: quantumDreamsImage, chapter: "Chapter 24", timeAgo: "21 hours ago" },
+    { title: "The Top Student Hides Her Regression", image: vampireAcademyImage, chapter: "Chapter 31", timeAgo: "21 hours ago" },
+    { title: "Cyber Nexus Protocol", image: lostProphecyImage, chapter: "Chapter 15", timeAgo: "1 day ago" },
   ];
 
   const popularStories = [
-    { title: "Cyber Nexus Protocol", image: cyberNexusImage, chapters: 6, views: 8945, comments: 156, status: "popular" as const },
-    { title: "Hearts in Harmony", image: heartsHarmonyImage, chapters: 12, views: 7234, comments: 134, status: "popular" as const },
-    { title: "Shadow Realm Chronicles", image: heroImage, chapters: 8, views: 9876, comments: 245, status: "popular" as const },
-    { title: "Magenetic: The Lost Prophecy", image: lostProphecyImage, chapters: 15, views: 12456, comments: 356, status: "popular" as const },
-    { title: "Quantum Dreams", image: quantumDreamsImage, chapters: 3, views: 5432, comments: 89, status: "popular" as const },
-    { title: "Vampire Academy: Blood Wars", image: vampireAcademyImage, chapters: 7, views: 6789, comments: 123, status: "popular" as const },
+    { title: "The Zenith is Dead", image: cyberNexusImage, chapter: "Chapter 27", timeAgo: "21 hours ago" },
+    { title: "Holy Necromancer", image: heartsHarmonyImage, chapter: "Chapter 48", timeAgo: "23 hours ago" },
+    { title: "Hypogeum I", image: heroImage, chapter: "Chapter 23", timeAgo: "21 hours ago" },
+    { title: "The Ultimate Multi-Talented Prophet", image: lostProphecyImage, chapter: "Chapter 24", timeAgo: "21 hours ago" },
+    { title: "The Top Student Hides Her Regression", image: quantumDreamsImage, chapter: "Chapter 31", timeAgo: "21 hours ago" },
+    { title: "Shadow Realm Chronicles", image: vampireAcademyImage, chapter: "Chapter 8", timeAgo: "1 day ago" },
   ];
 
-  const latestStories = [
-    { title: "Quantum Dreams", image: quantumDreamsImage, chapters: 3, views: 234, comments: 7, status: "latest" as const },
-    { title: "Cyber Nexus Protocol", image: cyberNexusImage, chapters: 6, views: 456, comments: 12, status: "latest" as const },
-    { title: "Hearts in Harmony", image: heartsHarmonyImage, chapters: 12, views: 789, comments: 23, status: "latest" as const },
-    { title: "Magenetic: The Lost Prophecy", image: lostProphecyImage, chapters: 15, views: 1234, comments: 45, status: "latest" as const },
-    { title: "Shadow Realm Chronicles", image: heroImage, chapters: 8, views: 567, comments: 18, status: "latest" as const },
-    { title: "Vampire Academy: Blood Wars", image: vampireAcademyImage, chapters: 7, views: 890, comments: 34, status: "latest" as const },
+  const recentlyUpdated = [
+    { 
+      title: "The Devil Butler", 
+      image: heroImage, 
+      chapter: "Chapter 548", 
+      timeAgo: "2 weeks ago"
+    },
+    { 
+      title: "Regressing with the King's Power", 
+      image: cyberNexusImage, 
+      chapter: "Chapter 227", 
+      timeAgo: "2 weeks ago"
+    },
+    { 
+      title: "Rebirth of the Ultimate Master", 
+      image: quantumDreamsImage, 
+      chapter: "Chapter 181: Trial by Fire", 
+      timeAgo: "3 weeks ago"
+    },
+    { 
+      title: "Rebirth of the Ultimate Master", 
+      image: quantumDreamsImage, 
+      chapter: "Chapter 180: The Origin of the Razormantle Clan", 
+      timeAgo: "3 weeks ago"
+    },
+    { 
+      title: "Regressing with the King's Power", 
+      image: cyberNexusImage, 
+      chapter: "Chapter 226", 
+      timeAgo: "3 weeks ago"
+    },
+    { 
+      title: "Rise in the Apocalyptic World", 
+      image: vampireAcademyImage, 
+      chapter: "Chapter 297", 
+      timeAgo: "3 weeks ago"
+    }
+  ];
+
+  const topSeries = [
+    {
+      rank: 1,
+      title: "The Iron-Blooded Necromancer Has Returned",
+      image: heroImage,
+      tags: [
+        { name: "Fantasy" },
+        { name: "Action" },
+        { name: "Overpowered" }
+      ]
+    },
+    {
+      rank: 2,
+      title: "Everyone Regressed Except Me",
+      image: cyberNexusImage,
+      tags: [
+        { name: "Fantasy" },
+        { name: "Action" },
+        { name: "Regression" }
+      ]
+    },
+    {
+      rank: 3,
+      title: "Lord of Mana",
+      image: quantumDreamsImage,
+      tags: [
+        { name: "Fantasy" },
+        { name: "Action" },
+        { name: "Ascension" }
+      ]
+    },
+    {
+      rank: 4,
+      title: "Popular Psychopath",
+      image: vampireAcademyImage,
+      tags: [
+        { name: "Fantasy" },
+        { name: "Action" },
+        { name: "Psychological" }
+      ]
+    },
+    {
+      rank: 5,
+      title: "Woke up as a Worthless Swordsmanship Genius",
+      image: lostProphecyImage,
+      tags: [
+        { name: "Fantasy" },
+        { name: "Action" },
+        { name: "Isekai" }
+      ]
+    },
+    {
+      rank: 6,
+      title: "Chosen by the Hero King, the Second Life of the Illegitimate...",
+      image: heartsHarmonyImage,
+      tags: [
+        { name: "Fantasy" },
+        { name: "Action" }
+      ]
+    },
+    {
+      rank: 7,
+      title: "The Iron-Blooded Necromancer Has Returned",
+      image: heroImage,
+      tags: [
+        { name: "Fantasy" },
+        { name: "Action" },
+        { name: "Overpowered" }
+      ]
+    },
+    {
+      rank: 8,
+      title: "Lord of Mana",
+      image: quantumDreamsImage,
+      tags: [
+        { name: "Fantasy" },
+        { name: "Action" },
+        { name: "Ascension" }
+      ]
+    },
+    {
+      rank: 9,
+      title: "I Regressed with the Heavenly Demon",
+      image: cyberNexusImage,
+      tags: [
+        { name: "Fantasy" },
+        { name: "Action" },
+        { name: "Regression" }
+      ]
+    }
   ];
 
   return (
@@ -61,44 +229,56 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-hero py-20 overflow-hidden">
+      <section className="relative bg-solid-hero py-20 overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                <Sparkles className="h-4 w-4 text-primary mr-2" />
-                <span className="text-primary text-sm font-medium">Featured</span>
+          <DragCarousel 
+            autoPlay={true}
+            autoPlayInterval={5000}
+            showDots={true}
+            className="w-full"
+            itemsPerView={1}
+          >
+            {heroStories.map((hero) => (
+              <div key={hero.id} className="w-full">
+                <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+                  <div className="space-y-6">
+                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                      <Sparkles className="h-4 w-4 text-primary mr-2" />
+                      <span className="text-primary text-sm font-medium">Featured</span>
+                    </div>
+                    
+                    <div>
+                      <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-4">
+                        {hero.title}
+                      </h1>
+                      <p className="text-xl text-muted-foreground mb-2">
+                        by {hero.author}
+                      </p>
+                      <p className="text-muted-foreground mb-8">
+                        {hero.description}
+                      </p>
+                    </div>
+                    
+                    <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-glow">
+                      <BookOpen className="mr-2 h-5 w-5" />
+                      Start Reading
+                    </Button>
+                  </div>
+                  
+                  <div className="relative">
+                    <div className="relative rounded-2xl overflow-hidden shadow-hero">
+                      <img 
+                        src={hero.image} 
+                        alt={hero.title}
+                        className="w-full h-96 lg:h-[500px] object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/40" />
+                    </div>
+                  </div>
+                </div>
               </div>
-              
-              <div>
-                <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-4">
-                  Shadow Realm Chronicles
-                </h1>
-                <p className="text-xl text-muted-foreground mb-2">
-                  by Community Authors
-                </p>
-                <p className="text-muted-foreground mb-8">
-                  Discover amazing stories from talented writers around the world.
-                </p>
-              </div>
-              
-              <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-glow">
-                <BookOpen className="mr-2 h-5 w-5" />
-                Start Reading
-              </Button>
-            </div>
-            
-            <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-hero">
-                <img 
-                  src={heroImage} 
-                  alt="Shadow Realm Chronicles"
-                  className="w-full h-96 lg:h-[500px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              </div>
-            </div>
-          </div>
+            ))}
+          </DragCarousel>
         </div>
       </section>
 
@@ -118,75 +298,152 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Trending Now */}
+      {/* Trending this week */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <SectionHeader
-            icon={<TrendingUp className="h-6 w-6" />}
-            title="Trending Now"
-            subtitle="Most popular stories this week"
-            viewAllLink="/trending"
-            accentColor="text-trending"
-          />
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-foreground mb-2">Top Series</h2>
+          </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {trendingStories.map((story, index) => (
-              <StoryCard key={index} {...story} />
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Column 1: Ranks 1-3 */}
+            <div className="space-y-4">
+              {topSeries.slice(0, 3).map((series) => (
+                <TopSeriesCard key={series.rank} {...series} />
+              ))}
+            </div>
+            
+            {/* Column 2: Ranks 4-6 */}
+            <div className="space-y-4">
+              {topSeries.slice(3, 6).map((series) => (
+                <TopSeriesCard key={series.rank} {...series} />
+              ))}
+            </div>
+            
+            {/* Column 3: Ranks 7-9 */}
+            <div className="space-y-4">
+              {topSeries.slice(6, 9).map((series) => (
+                <TopSeriesCard key={series.rank} {...series} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
+
       {/* New Stories */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
-          <SectionHeader
-            icon={<Sparkles className="h-6 w-6" />}
-            title="New Stories"
-            viewAllLink="/new"
-            accentColor="text-new"
-          />
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {newStories.map((story, index) => (
-              <StoryCard key={index} {...story} />
-            ))}
+          <div className="mb-8 flex items-center justify-between">
+            <h2 className="text-3xl font-bold text-foreground mb-2">New Stories</h2>
+            <button className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+              View All →
+            </button>
           </div>
+          
+          <DragCarousel 
+            autoPlay={false}
+            showDots={true}
+            className="w-full"
+            itemsPerView={6}
+          >
+            {newStories.map((story, index) => (
+              <div key={index} className="px-3">
+                <StoryCard {...story} />
+              </div>
+            ))}
+          </DragCarousel>
         </div>
       </section>
 
       {/* Popular Stories */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <SectionHeader
-            icon={<Heart className="h-6 w-6" />}
-            title="Popular Stories"
-            viewAllLink="/popular"
-            accentColor="text-popular"
-          />
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {popularStories.map((story, index) => (
-              <StoryCard key={index} {...story} />
-            ))}
+          <div className="mb-8 flex items-center justify-between">
+            <h2 className="text-3xl font-bold text-foreground mb-2">Popular Stories</h2>
+            <button className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+              View All →
+            </button>
           </div>
+          
+          <DragCarousel 
+            autoPlay={false}
+            showDots={true}
+            className="w-full"
+            itemsPerView={6}
+          >
+            {popularStories.map((story, index) => (
+              <div key={index} className="px-3">
+                <StoryCard {...story} />
+              </div>
+            ))}
+          </DragCarousel>
         </div>
       </section>
 
-      {/* Latest Updates */}
+      {/* Most Recently Updated */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
-          <SectionHeader
-            icon={<Clock className="h-6 w-6" />}
-            title="Latest Updates"
-            viewAllLink="/latest"
-            accentColor="text-latest"
-          />
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-foreground mb-2">Most recently updated</h2>
+          </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {latestStories.map((story, index) => (
-              <StoryCard key={index} {...story} />
+          <div className="space-y-4 mb-8">
+            {recentlyUpdated.map((story, index) => (
+              <div key={index} className="flex items-center gap-4 p-4 bg-card rounded-lg border border-border hover:bg-accent/50 transition-colors">
+                <div className="flex-shrink-0">
+                  <img 
+                    src={story.image} 
+                    alt={story.title}
+                    className="w-16 h-20 object-cover rounded-md"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-semibold text-foreground truncate">
+                    {story.title}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {story.chapter}
+                  </p>
+                </div>
+                <div className="flex-shrink-0">
+                  <span className="text-sm text-muted-foreground">
+                    {story.timeAgo}
+                  </span>
+                </div>
+              </div>
             ))}
+          </div>
+
+          {/* Pagination */}
+          <div className="flex justify-center items-center gap-2">
+            <button className="p-2 rounded-md bg-card border border-border hover:bg-accent text-muted-foreground">
+              ‹
+            </button>
+            <button className="px-3 py-2 rounded-md bg-primary text-primary-foreground font-medium">
+              1
+            </button>
+            <button className="px-3 py-2 rounded-md bg-card border border-border hover:bg-accent text-muted-foreground">
+              2
+            </button>
+            <button className="px-3 py-2 rounded-md bg-card border border-border hover:bg-accent text-muted-foreground">
+              3
+            </button>
+            <button className="px-3 py-2 rounded-md bg-card border border-border hover:bg-accent text-muted-foreground">
+              4
+            </button>
+            <button className="px-3 py-2 rounded-md bg-card border border-border hover:bg-accent text-muted-foreground">
+              5
+            </button>
+            <span className="px-3 py-2 text-muted-foreground">
+              ...
+            </span>
+            <button className="px-3 py-2 rounded-md bg-card border border-border hover:bg-accent text-muted-foreground">
+              17
+            </button>
+            <button className="p-2 rounded-md bg-card border border-border hover:bg-accent text-muted-foreground">
+              ›
+            </button>
           </div>
         </div>
       </section>
@@ -196,10 +453,38 @@ const Index = () => {
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <BookOpen className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            <span className="text-xl font-bold text-foreground">
               Fiction Realm
             </span>
           </div>
+          
+          {/* Navigation Links */}
+          <div className="flex items-center justify-center space-x-8 mb-4">
+            <a href="/" className="text-muted-foreground hover:text-foreground transition-colors">
+              Home
+            </a>
+            <a href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
+              Privacy
+            </a>
+            <a href="/dmca" className="text-muted-foreground hover:text-foreground transition-colors">
+              DMCA
+            </a>
+            <a href="/faq" className="text-muted-foreground hover:text-foreground transition-colors">
+              FAQ
+            </a>
+          </div>
+
+          {/* Discord Icon */}
+          <div className="flex items-center justify-center mb-4">
+            <svg 
+              className="h-8 w-8 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" 
+              viewBox="0 0 24 24" 
+              fill="currentColor"
+            >
+              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.195.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+            </svg>
+          </div>
+          
           <p className="text-muted-foreground text-sm">
             Make and ❤ by the awesome fiction network.
           </p>

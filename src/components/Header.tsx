@@ -9,7 +9,7 @@ const Header = () => {
           <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-2">
               <BookOpen className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              <span className="text-xl font-bold text-foreground">
                 FictionRealm
               </span>
             </div>

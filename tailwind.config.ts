@@ -66,13 +66,29 @@ export default {
 				'trending': 'hsl(var(--trending-accent))',
 				'new': 'hsl(var(--new-accent))',
 				'popular': 'hsl(var(--popular-accent))',
-				'latest': 'hsl(var(--latest-accent))'
+				'latest': 'hsl(var(--latest-accent))',
+				'genre-fantasy': 'hsl(var(--genre-fantasy))',
+				'genre-action': 'hsl(var(--genre-action))',
+				'genre-romance': 'hsl(var(--genre-romance))',
+				'genre-mystery': 'hsl(var(--genre-mystery))',
+				'genre-scifi': 'hsl(var(--genre-scifi))',
+				'genre-horror': 'hsl(var(--genre-horror))',
+				'genre-adventure': 'hsl(var(--genre-adventure))',
+				'genre-drama': 'hsl(var(--genre-drama))',
+				'genre-fantasy-text': 'hsl(var(--genre-fantasy-text))',
+				'genre-action-text': 'hsl(var(--genre-action-text))',
+				'genre-romance-text': 'hsl(var(--genre-romance-text))',
+				'genre-mystery-text': 'hsl(var(--genre-mystery-text))',
+				'genre-scifi-text': 'hsl(var(--genre-scifi-text))',
+				'genre-horror-text': 'hsl(var(--genre-horror-text))',
+				'genre-adventure-text': 'hsl(var(--genre-adventure-text))',
+				'genre-drama-text': 'hsl(var(--genre-drama-text))'
 			},
-			backgroundImage: {
-				'hero-gradient': 'var(--hero-gradient)',
-				'gradient-primary': 'var(--gradient-primary)',
-				'gradient-card': 'var(--gradient-card)',
-				'gradient-hero': 'var(--gradient-hero)'
+			backgroundColor: {
+				'hero-bg': 'hsl(var(--hero-background))',
+				'solid-primary': 'hsl(var(--solid-primary))',
+				'solid-card': 'hsl(var(--solid-card))',
+				'solid-hero': 'hsl(var(--solid-hero))'
 			},
 			boxShadow: {
 				'card': 'var(--shadow-card)',
