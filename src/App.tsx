@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Discover from "./pages/Discover";
 import Library from "./pages/Library";
 import Profile from "./pages/Profile";
+import NovelDetail from "./pages/NovelDetail";
 import BottomNav from "./components/BottomNav";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/discover" element={<Discover />} />
           <Route path="/library" element={<Library />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/novel/:slug" element={<NovelDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
