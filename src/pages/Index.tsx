@@ -231,7 +231,7 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-solid-hero py-8 md:py-16 lg:py-20 overflow-hidden">
+      <section className="relative bg-solid-hero py-6 md:py-10 lg:py-14 overflow-hidden">
         <div className="container mx-auto px-4">
           <DragCarousel 
             autoPlay={true}
@@ -267,12 +267,12 @@ const Index = () => {
                     </Button>
                   </div>
                   
-                  <div className="relative order-first lg:order-last">
-                    <div className="relative rounded-2xl overflow-hidden shadow-hero">
+                  <div className="relative order-first lg:order-last flex justify-center">
+                    <div className="relative rounded-2xl overflow-hidden shadow-hero w-56 sm:w-64 md:w-72 lg:w-80 aspect-[3/4]">
                       <img 
                         src={hero.image} 
                         alt={hero.title}
-                        className="w-full h-64 md:h-80 lg:h-[500px] object-cover"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/40" />
                     </div>
@@ -285,25 +285,38 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 bg-background">
+      <section className="py-6 md:py-8 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {statsData.map((stat, index) => (
-              <StatsCard
-                key={index}
-                icon={stat.icon}
-                value={stat.value}
-                label={stat.label}
-              />
-            ))}
-          </div>
+          {isMobile ? (
+            <div className="rounded-xl border border-border bg-card/70 shadow-card p-3">
+              <div className="flex items-center justify-between">
+                {statsData.map((stat, index) => (
+                  <div key={index} className="flex-1 text-center">
+                    <div className="text-base font-semibold text-foreground">{stat.value}</div>
+                    <div className="text-xs text-muted-foreground">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+              {statsData.map((stat, index) => (
+                <StatsCard
+                  key={index}
+                  icon={stat.icon}
+                  value={stat.value}
+                  label={stat.label}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* Trending this week */}
-      <section className="py-16 bg-background">
+      <section className="py-10 md:py-12 bg-background">
         <div className="container mx-auto px-4">
-          <div className="mb-8">
+          <div className="mb-6 md:mb-8">
             <h2 className="text-3xl font-bold text-foreground mb-2">Top Series</h2>
           </div>
           
@@ -346,9 +359,9 @@ const Index = () => {
 
 
       {/* New Stories */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-10 md:py-12 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="mb-8 flex items-center justify-between">
+          <div className="mb-6 md:mb-8 flex items-center justify-between">
             <h2 className="text-3xl font-bold text-foreground mb-2">New Stories</h2>
             <button className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
               View All →
@@ -371,9 +384,9 @@ const Index = () => {
       </section>
 
       {/* Popular Stories */}
-      <section className="py-16 bg-background">
+      <section className="py-10 md:py-12 bg-background">
         <div className="container mx-auto px-4">
-          <div className="mb-8 flex items-center justify-between">
+          <div className="mb-6 md:mb-8 flex items-center justify-between">
             <h2 className="text-3xl font-bold text-foreground mb-2">Popular Stories</h2>
             <button className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
               View All →
@@ -396,13 +409,13 @@ const Index = () => {
       </section>
 
       {/* Most Recently Updated */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-10 md:py-12 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="mb-8">
+          <div className="mb-6 md:mb-8">
             <h2 className="text-3xl font-bold text-foreground mb-2">Most recently updated</h2>
           </div>
           
-          <div className="space-y-4 mb-8">
+          <div className="space-y-3 mb-6 md:mb-8">
             {recentlyUpdated.map((story, index) => (
               <div key={index} className="flex items-center gap-4 p-4 bg-card rounded-lg border border-border hover:bg-accent/50 transition-colors">
                 <div className="flex-shrink-0">
@@ -463,7 +476,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-border py-12">
+      <footer className="bg-card border-t border-border py-8 md:py-10">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <BookOpen className="h-6 w-6 text-primary" />
