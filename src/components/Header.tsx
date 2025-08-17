@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Search, BookOpen, Home, Compass, Library } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -31,15 +32,24 @@ const Header = () => {
           </div>
 
           <div className="flex items-center space-x-4">
+            {/* Desktop search */}
             <div className="hidden sm:flex items-center space-x-2">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <input
                   type="search"
                   placeholder="Search stories..."
-                  className="pl-10 pr-4 py-2 w-64 rounded-md bg-muted border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  className="pl-10 pr-4 py-2 w-64 rounded-md bg-muted border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 ease-out focus:w-80"
                 />
               </div>
+            </div>
+            {/* Mobile search button */}
+            <div className="sm:hidden">
+              <Link to="/discover" aria-label="Search">
+                <Button variant="ghost" size="icon" className="text-foreground hover:text-primary">
+                  <Search className="h-5 w-5" />
+                </Button>
+              </Link>
             </div>
             
             <Button variant="default" size="sm" className="bg-primary hover:bg-primary/90">

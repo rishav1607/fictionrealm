@@ -227,7 +227,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20 md:pb-0">
       <Header />
       
       {/* Hero Section */}
@@ -307,28 +307,40 @@ const Index = () => {
             <h2 className="text-3xl font-bold text-foreground mb-2">Top Series</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Column 1: Ranks 1-3 */}
-            <div className="space-y-4">
-              {topSeries.slice(0, 3).map((series) => (
-                <TopSeriesCard key={series.rank} {...series} />
+          {isMobile ? (
+            <DragCarousel autoPlay={false} showDots={true} className="w-full" itemsPerView={1}>
+              {[0, 3, 6].map((start) => (
+                <div key={start} className="space-y-4">
+                  {topSeries.slice(start, start + 3).map((series) => (
+                    <TopSeriesCard key={series.rank} {...series} />
+                  ))}
+                </div>
               ))}
+            </DragCarousel>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Column 1: Ranks 1-3 */}
+              <div className="space-y-4">
+                {topSeries.slice(0, 3).map((series) => (
+                  <TopSeriesCard key={series.rank} {...series} />
+                ))}
+              </div>
+              
+              {/* Column 2: Ranks 4-6 */}
+              <div className="space-y-4">
+                {topSeries.slice(3, 6).map((series) => (
+                  <TopSeriesCard key={series.rank} {...series} />
+                ))}
+              </div>
+              
+              {/* Column 3: Ranks 7-9 */}
+              <div className="space-y-4">
+                {topSeries.slice(6, 9).map((series) => (
+                  <TopSeriesCard key={series.rank} {...series} />
+                ))}
+              </div>
             </div>
-            
-            {/* Column 2: Ranks 4-6 */}
-            <div className="space-y-4">
-              {topSeries.slice(3, 6).map((series) => (
-                <TopSeriesCard key={series.rank} {...series} />
-              ))}
-            </div>
-            
-            {/* Column 3: Ranks 7-9 */}
-            <div className="space-y-4">
-              {topSeries.slice(6, 9).map((series) => (
-                <TopSeriesCard key={series.rank} {...series} />
-              ))}
-            </div>
-          </div>
+          )}
         </div>
       </section>
 
