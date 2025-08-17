@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { BookOpen } from "lucide-react";
 
 interface TopSeriesCardProps {
   rank: number;
@@ -20,6 +21,32 @@ const TopSeriesCard = ({
   tags,
   className = "" 
 }: TopSeriesCardProps) => {
+  const getRankTextColor = (rank: number) => {
+    switch (rank) {
+      case 1:
+        return "text-yellow-400 font-extrabold";
+      case 2:
+        return "text-gray-300 font-bold";
+      case 3:
+        return "text-amber-500 font-bold";
+      case 4:
+        return "text-blue-400 font-semibold";
+      case 5:
+        return "text-purple-400 font-semibold";
+      case 6:
+        return "text-green-400 font-semibold";
+      case 7:
+        return "text-red-400 font-semibold";
+      case 8:
+        return "text-pink-400 font-semibold";
+      case 9:
+        return "text-indigo-400 font-semibold";
+      default:
+        return "text-foreground font-bold";
+    }
+  };
+
+
   const getGenreStyles = (genre: string) => {
     switch (genre.toLowerCase()) {
       case "fantasy":
@@ -42,20 +69,27 @@ const TopSeriesCard = ({
         return "bg-muted text-muted-foreground border-muted";
     }
   };
+
   return (
-    <div className={`flex items-center space-x-4 p-4 bg-card rounded-lg hover:bg-card-hover transition-colors duration-200 ${className}`}>
+    <div className={`group flex items-center space-x-4 p-4 bg-card rounded-lg hover:bg-card-hover transition-colors duration-200 ${className}`}>
       {/* Rank Number */}
-      <div className="text-4xl font-bold text-foreground w-12 text-center">
+      <div className={`text-4xl w-12 text-center ${getRankTextColor(rank)}`}>
         {rank}
       </div>
       
       {/* Book Cover */}
-      <div className="relative">
+      <div className="relative overflow-hidden rounded-md">
         <img 
           src={image} 
           alt={title}
-          className="w-16 h-20 object-cover rounded-md"
+          className="w-16 h-20 object-cover rounded-md transition-transform duration-300 group-hover:scale-105"
         />
+        {/* Read Icon Overlay */}
+        <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-primary rounded-full p-1.5 transform scale-75 group-hover:scale-100 transition-transform duration-300">
+            <BookOpen className="h-3 w-3 text-primary-foreground" />
+          </div>
+        </div>
       </div>
       
       {/* Content */}

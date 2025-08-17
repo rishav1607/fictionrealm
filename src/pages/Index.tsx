@@ -6,6 +6,7 @@ import SectionHeader from "@/components/SectionHeader";
 import TopSeriesCard from "@/components/TopSeriesCard";
 import DragCarousel from "@/components/DragCarousel";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { BookOpen, Eye, Users, MessageSquare, TrendingUp, Sparkles, Heart, Clock } from "lucide-react";
 
 // Import generated images
@@ -17,6 +18,7 @@ import quantumDreamsImage from "@/assets/story-quantum-dreams.jpg";
 import vampireAcademyImage from "@/assets/story-vampire-academy.jpg";
 
 const Index = () => {
+  const isMobile = useIsMobile();
   const heroStories = [
     {
       id: 1,
@@ -229,7 +231,7 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-solid-hero py-20 overflow-hidden">
+      <section className="relative bg-solid-hero py-8 md:py-16 lg:py-20 overflow-hidden">
         <div className="container mx-auto px-4">
           <DragCarousel 
             autoPlay={true}
@@ -240,21 +242,21 @@ const Index = () => {
           >
             {heroStories.map((hero) => (
               <div key={hero.id} className="w-full">
-                <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
-                  <div className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
+                  <div className="space-y-4 md:space-y-6 text-center lg:text-left">
                     <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
                       <Sparkles className="h-4 w-4 text-primary mr-2" />
                       <span className="text-primary text-sm font-medium">Featured</span>
                     </div>
                     
                     <div>
-                      <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-4">
+                      <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold text-foreground mb-4">
                         {hero.title}
                       </h1>
-                      <p className="text-xl text-muted-foreground mb-2">
+                      <p className="text-lg md:text-xl text-muted-foreground mb-2">
                         by {hero.author}
                       </p>
-                      <p className="text-muted-foreground mb-8">
+                      <p className="text-sm md:text-base text-muted-foreground mb-6 md:mb-8">
                         {hero.description}
                       </p>
                     </div>
@@ -265,12 +267,12 @@ const Index = () => {
                     </Button>
                   </div>
                   
-                  <div className="relative">
+                  <div className="relative order-first lg:order-last">
                     <div className="relative rounded-2xl overflow-hidden shadow-hero">
                       <img 
                         src={hero.image} 
                         alt={hero.title}
-                        className="w-full h-96 lg:h-[500px] object-cover"
+                        className="w-full h-64 md:h-80 lg:h-[500px] object-cover"
                       />
                       <div className="absolute inset-0 bg-black/40" />
                     </div>
@@ -305,7 +307,7 @@ const Index = () => {
             <h2 className="text-3xl font-bold text-foreground mb-2">Top Series</h2>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Column 1: Ranks 1-3 */}
             <div className="space-y-4">
               {topSeries.slice(0, 3).map((series) => (
@@ -345,11 +347,11 @@ const Index = () => {
             autoPlay={false}
             showDots={true}
             className="w-full"
-            itemsPerView={6}
+            itemsPerView={isMobile ? 2 : 6}
           >
             {newStories.map((story, index) => (
               <div key={index} className="px-3">
-                <StoryCard {...story} />
+                <StoryCard {...story} compact={isMobile} />
               </div>
             ))}
           </DragCarousel>
@@ -370,11 +372,11 @@ const Index = () => {
             autoPlay={false}
             showDots={true}
             className="w-full"
-            itemsPerView={6}
+            itemsPerView={isMobile ? 2 : 6}
           >
             {popularStories.map((story, index) => (
               <div key={index} className="px-3">
-                <StoryCard {...story} />
+                <StoryCard {...story} compact={isMobile} />
               </div>
             ))}
           </DragCarousel>

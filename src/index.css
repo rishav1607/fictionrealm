@@ -8,40 +8,40 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* FictionRealm Custom Dark Theme - #151918 and #1b1d1f */
-    --background: 172 15% 9%;
+    /* FictionRealm Custom Dark Theme - #141818 and #1b1d1f */
+    --background: 180 9% 9%;
     --foreground: 0 0% 100%;
 
-    --card: 185 11% 11%;
+    --card: 210 7% 11%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 185 11% 11%;
+    --popover: 210 7% 11%;
     --popover-foreground: 0 0% 100%;
 
     --primary: 0 0% 100%;
-    --primary-foreground: 172 15% 9%;
+    --primary-foreground: 180 9% 9%;
 
-    --secondary: 185 11% 11%;
+    --secondary: 210 7% 11%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 185 11% 13%;
+    --muted: 210 7% 11%;
     --muted-foreground: 0 0% 70%;
 
     --accent: 0 0% 100%;
-    --accent-foreground: 172 15% 9%;
+    --accent-foreground: 180 9% 9%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 185 11% 20%;
-    --input: 185 11% 20%;
+    --border: 210 7% 20%;
+    --input: 210 7% 20%;
     --ring: 0 0% 100%;
 
     --radius: 0.75rem;
 
     /* Custom FictionRealm tokens - solid colors only */
-    --hero-background: 172 15% 9%;
-    --card-hover: 185 11% 13%;
+    --hero-background: 180 9% 9%;
+    --card-hover: 210 7% 12%;
     --stats-bg: 0 0% 100%;
     --trending-accent: 25 95% 53%;
     --new-accent: 120 100% 50%;
@@ -68,21 +68,21 @@ All colors MUST be HSL.
     
     /* Removed gradients - using solid colors */
     --solid-primary: 0 0% 100%;
-    --solid-card: 185 11% 11%;
-    --solid-hero: 172 15% 9%;
+    --solid-card: 210 7% 11%;
+    --solid-hero: 180 9% 9%;
     
     /* Simplified shadows */
     --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.5);
     --shadow-hero: 0 10px 40px -10px hsl(0 0% 0% / 0.3);
     --shadow-glow: 0 0 30px hsl(0 0% 100% / 0.2);
 
-    --sidebar-background: 185 11% 11%;
+    --sidebar-background: 210 7% 11%;
     --sidebar-foreground: 0 0% 100%;
     --sidebar-primary: 0 0% 100%;
-    --sidebar-primary-foreground: 172 15% 9%;
-    --sidebar-accent: 185 11% 13%;
+    --sidebar-primary-foreground: 180 9% 9%;
+    --sidebar-accent: 210 7% 11%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 185 11% 20%;
+    --sidebar-border: 210 7% 20%;
     --sidebar-ring: 0 0% 100%;
   }
 
@@ -144,5 +144,14 @@ All colors MUST be HSL.
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 }

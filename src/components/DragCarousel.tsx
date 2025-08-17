@@ -85,7 +85,11 @@ const DragCarousel = ({
   const handlePointerUp = (e: React.PointerEvent) => {
     if (!isDragging) return;
     if (containerRef.current) {
-      try { containerRef.current.releasePointerCapture(e.pointerId); } catch {}
+      try {
+        containerRef.current.releasePointerCapture(e.pointerId);
+      } catch (error) {
+        // Ignore errors when releasing pointer capture
+      }
     }
 
     // Velocity-based flick
